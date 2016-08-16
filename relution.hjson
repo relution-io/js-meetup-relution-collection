@@ -1,0 +1,18 @@
+{
+  //app name
+  name: jsMeetupRelution
+  //description for the project
+  description: Auto Generated Description for jsMeetupRelution.
+  //on which baseAlias the app is available
+  baseAlias: /jsMeetupRelution
+  //uuid identifier
+  uuid: 076485b0-63a9-11e6-bc0f-f3a2babba961
+  //static files
+  client: ./www
+  //node start script
+  server: ./app.js
+  //shows directoryIndex on the Server good for debugging
+  //directoryIndex: true
+  //@todo have to be defined
+  private: false
+}

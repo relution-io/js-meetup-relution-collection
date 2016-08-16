@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wadl:application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wadl="http://research.sun.com/wadl/2006/10" xsi:schemaLocation="http://research.sun.com/wadl/2006/10 wadl.xsd">
+  <wadl:grammars>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="people">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="starships" type="xs:string" maxOccurs="unbounded" />
+            <xs:element name="height" type="xs:string" />
+            <xs:element name="hair_color" type="xs:string" />
+            <xs:element name="vehicles" type="xs:string" maxOccurs="unbounded" />
+            <xs:element name="birth_year" type="xs:string" />
+            <xs:element name="skin_color" type="xs:string" />
+            <xs:element name="mass" type="xs:string" />
+            <xs:element name="name" type="xs:string" />
+            <xs:element name="films" type="xs:string" maxOccurs="unbounded" />
+            <xs:element name="species" type="xs:string" maxOccurs="unbounded" />
+            <xs:element name="eye_color" type="xs:string" />
+            <xs:element name="gender" type="xs:string" />
+            <xs:element name="url" type="xs:string" />
+            <xs:element name="homeworld" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="starships">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="consumables" type="xs:string" />
+            <xs:element name="model" type="xs:string" />
+            <xs:element name="passengers" type="xs:string" />
+            <xs:element name="url" type="xs:string" />
+            <xs:element name="manufacturer" type="xs:string" />
+            <xs:element name="length" type="xs:string" />
+            <xs:element name="cost_in_credits" type="xs:string" />
+            <xs:element name="created" type="xs:string" />
+            <xs:element name="cargo_capacity" type="xs:string" />
+            <xs:element name="starship_class" type="xs:string" />
+            <xs:element name="edited" type="xs:string" />
+            <xs:element name="films" type="xs:string" maxOccurs="unbounded"/>
+            <xs:element name="name" type="xs:string" />
+            <xs:element name="MGLT" type="xs:string" />
+            <xs:element name="pilots" type="xs:string" maxOccurs="unbounded"/>
+            <xs:element name="hyperdrive_rating" type="xs:string" />
+            <xs:element name="crew" type="xs:string" />
+            <xs:element name="max_atmosphering_speed" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+   </wadl:grammars>
+  <wadl:resources base="http://swapi.co/api">
+    <wadl:resource path="people/{id}">
+      <wadl:param name="id" type="xs:number" required="true" style="template" />
+      <wadl:method name="GET">
+        <wadl:request />
+        <wadl:response status="">
+          <wadl:representation mediaType="application/json" element="people" />
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="planet/{id}">
+      <wadl:param name="id" type="xs:number" required="true" style="template" />
+      <wadl:method name="GET">
+        <wadl:request />
+        <wadl:response status="">
+          <wadl:representation mediaType="application/json" />
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="vehicles/{id}">
+      <wadl:param name="id" type="xs:number" required="true" style="template" />
+      <wadl:method name="GET">
+        <wadl:request />
+        <wadl:response status="">
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="starships/{id}">
+      <wadl:param name="id" type="xs:number" required="true" style="template" />
+      <wadl:method name="GET">
+        <wadl:request />
+        <wadl:response status="">
+          <wadl:representation mediaType="application/json" element="starships"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="films/{id}">
+      <wadl:param name="id" type="xs:number" required="true" style="template" />
+      <wadl:method name="GET">
+        <wadl:request />
+        <wadl:response status="">
+          <wadl:representation mediaType="application/json" />
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="species/{id}">
+      <wadl:param name="id" type="xs:number" required="true" style="template" />
+      <wadl:method name="GET">
+        <wadl:request />
+        <wadl:response status="">
+          <wadl:representation mediaType="application/json" />
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+  </wadl:resources>
+</wadl:application>

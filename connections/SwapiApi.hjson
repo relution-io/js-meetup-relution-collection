@@ -1,0 +1,203 @@
+name: SwapiApi
+connectorProvider: HTTP(S)
+description: ""
+protocol: com.mwaysolutions.mcap.connector.http.RestConnectionConfig
+metadata: swapi.wadl
+calls:
+{// please add APIs in use by the backend here
+  getMovies: /films/{id}#GET
+  getPeople: /people/{id}#GET
+  getPlanet: /planet/{id}#GET
+  getSpecies: /species/{id}#GET
+  getStarships: /starships/{id}#GET
+  getVehicles: /vehicles/{id}#GET
+}
+properties:
+{
+  http.protocol.cookie-policy: compatibility
+  http.useragent: was_du_willst
+/**
+* @name jsonMediaTypes
+* @description A space-delimited list of MIME media type patterns or regular expressions to match JSON representations against. The default pattern is json and matches application/json, for example.
+* @dataType java.lang.String
+*/
+//jsonMediaTypes: */json */jsonp */javascript
+
+/**
+* @name xmlMediaTypes
+* @description A space-delimited list of MIME media type patterns or regular expressions to match XML representations against. The default pattern is a variant of xml matching any XML subtype, such as text/xml;charset=UTF-8.
+* @dataType java.lang.String
+*/
+//xmlMediaTypes: .*/(xml|[^+]*+xml|xml+[^+]*|[^+]*+xml+[^+]*)
+
+/**
+* @name username
+* @description User name for authentication, leave unset to use current web user.
+* @dataType java.lang.String
+*/
+//username: java.lang.String
+
+/**
+* @name password
+* @description Password for authentication, leave unset to use impersonation.
+* @dataType java.lang.String
+*/
+//password: java.lang.String
+
+/**
+* @name oAuthProviderType
+* @description Type of OAuth Provider.
+* @dataType java.lang.String
+*/
+//oAuthProviderType: oauth1, oauth2, saml, openID or cas
+
+/**
+* @name consumerKey
+* @description Key of the service consumer provided by the service provider.
+* @dataType java.lang.String
+*/
+//consumerKey: java.lang.String
+
+/**
+* @name consumerSecret
+* @description Secret of the service consumer provided by the service provider.
+* @dataType java.lang.String
+*/
+//consumerSecret: java.lang.String
+
+/**
+* @name scope
+* @description Type of access the conusmer should be granted.
+* @dataType java.lang.String
+*/
+//scope: java.lang.String
+
+/**
+* @name authorizationUrl
+* @description OAuth Authorization URL.
+* @dataType java.lang.String
+*/
+//authorizationUrl: java.lang.String
+
+/**
+* @name accessTokenUrl
+* @description OAuth access token URL.
+* @dataType java.lang.String
+*/
+//accessTokenUrl: java.lang.String
+
+/**
+* @name requestTokenUrl
+* @description URL to access the request token.
+* @dataType java.lang.String
+*/
+//requestTokenUrl: java.lang.String
+
+/**
+* @name accessTokenQuerystringParameter
+* @description Name of the Querystring Parameter for the access token that is used to sign the request for data.
+* @dataType java.lang.String
+*/
+//accessTokenQuerystringParameter: access_token
+
+/**
+* @name accessTokenRegexOptions
+* @description Regular Expression of the Format of the access token inside the OAuth Server Response.
+* @dataType java.lang.String
+*/
+//accessTokenRegexOptions: access_token=([^&]+), "access_token"\s*:\s*"(\S*?)", "access_token"\s*:\s*"([^&"]+)", "access_token":\s*"(\S*?)", oauth_token=([^&]+) or <Custom>
+
+/**
+* @name accessTokenRegexCustom
+* @description Custom Regular-Expression of the format of the access token inside the OAuth server Response.
+* @dataType java.lang.String
+*/
+//accessTokenRegexCustom: java.lang.String
+
+/**
+* @name refreshTokenRegex
+* @description Regular Expression of the format of the refresh token inside the OAuth Server Response.
+* @dataType java.lang.String
+*/
+//refreshTokenRegex: "refresh_token":"(S*?)"
+
+/**
+* @name tokenLifetimeRegex
+* @description Regular-Expression of the format of the lifetime of the access token inside the OAuth Server Response.
+* @dataType java.lang.String
+*/
+//tokenLifetimeRegex: "expires_in":(S*?)
+
+/**
+* @name responseType
+* @description The Response Type parameter informs the Authorization Server of the desired authorization processing flow, including what parameters are returned from the endpoints used.
+* @dataType java.lang.String
+*/
+//responseType: code
+
+/**
+* @name addParamsToBody
+* @description Add the OAuth Parameters to the request-body (or let them be added as query-parameters instead).
+* @dataType java.lang.Boolean
+*/
+//addParamsToBody: false
+
+/**
+* @name accessTokenVerb
+* @description HTTP Method to request an access token from the access token URL. Method should be either 'GET', 'POST' or 'PUT'.
+* @dataType java.lang.String
+*/
+//accessTokenVerb: GET
+
+/**
+* @name grantType
+* @description The grant type for this authorization request
+* @dataType java.lang.String
+*/
+//grantType: java.lang.String
+
+/**
+* @name signatureType
+* @description Append OAuth signature as query-paramter (default is to add the singature to the http-header).
+* @dataType java.lang.Boolean
+*/
+//signatureType: false
+
+/**
+* @name clientSecretParameter
+* @description Name of the parameter that takes the client secret for getting an access token
+* @dataType java.lang.String
+*/
+//clientSecretParameter: java.lang.String
+
+/**
+* @name codeParameter
+* @description Name of the parameter that takes the code return from the OAuth provider for getting an access token
+* @dataType java.lang.String
+*/
+//codeParameter: java.lang.String
+
+/**
+* @name http.connection.timeout
+* @description Determines the timeout until a connection is etablished. A value of zero means the timeout is not used. Leave unset to use default.
+* @dataType java.lang.Integer
+*/
+//http.connection.timeout: java.lang.Integer
+
+/**
+* @name http.socket.timeout
+* @description Timeout in milliseconds waiting for response data to be send by remote peer. Leave unset to use default.
+* @dataType java.lang.Integer
+*/
+//http.socket.timeout: java.lang.Integer
+
+/**
+* @name http.tcp.nodelay
+* @description Determines whether Nagle's algorithm is to be used. The Nagle's algorithm tries to conserve bandwidth by minimizing the number of segments that are sent. When applications wish to decrease network latency and increase performance, they can disable Nagle's algorithm (that is enable TCP_NODELAY). Data will be sent earlier, at the cost of an increase in bandwidth consumption. Leave unset to use the default.
+* @dataType java.lang.Boolean
+*/
+//http.tcp.nodelay: java.lang.Boolean
+
+  authentication: Disable
+  http.response.limit: "33554432"
+}
