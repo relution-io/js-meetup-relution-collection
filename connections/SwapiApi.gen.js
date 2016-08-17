@@ -1,13 +1,13 @@
 "use strict";
 // Relution APIs
-var connector = require('relution/connector.js');
+exports.connector = require('relution/connector.js');
 var SwapiApiBaseConnection = (function () {
     function SwapiApiBaseConnection(name) {
         if (name === void 0) { name = 'SwapiApi'; }
         this.name = name;
     }
     SwapiApiBaseConnection.prototype.configureSession = function (properties) {
-        return connector.configureSession(this.name, properties);
+        return exports.connector.configureSession(this.name, properties);
     };
     /**
 * SwapiApi['getMovies']
@@ -18,7 +18,7 @@ var SwapiApiBaseConnection = (function () {
 * @return Promise getMovies_output
 */
     SwapiApiBaseConnection.prototype.getMovies = function (input) {
-        return connector.runCall(this.name, 'getMovies', input);
+        return exports.connector.runCall(this.name, 'getMovies', input);
     };
     /**
 * SwapiApi['getPeople']
@@ -29,7 +29,7 @@ var SwapiApiBaseConnection = (function () {
 * @return Promise getPeople_output
 */
     SwapiApiBaseConnection.prototype.getPeople = function (input) {
-        return connector.runCall(this.name, 'getPeople', input);
+        return exports.connector.runCall(this.name, 'getPeople', input);
     };
     /**
 * SwapiApi['getPlanet']
@@ -40,7 +40,7 @@ var SwapiApiBaseConnection = (function () {
 * @return Promise getPlanet_output
 */
     SwapiApiBaseConnection.prototype.getPlanet = function (input) {
-        return connector.runCall(this.name, 'getPlanet', input);
+        return exports.connector.runCall(this.name, 'getPlanet', input);
     };
     /**
 * SwapiApi['getSpecies']
@@ -51,7 +51,7 @@ var SwapiApiBaseConnection = (function () {
 * @return Promise getSpecies_output
 */
     SwapiApiBaseConnection.prototype.getSpecies = function (input) {
-        return connector.runCall(this.name, 'getSpecies', input);
+        return exports.connector.runCall(this.name, 'getSpecies', input);
     };
     /**
 * SwapiApi['getStarships']
@@ -62,7 +62,7 @@ var SwapiApiBaseConnection = (function () {
 * @return Promise getStarships_output
 */
     SwapiApiBaseConnection.prototype.getStarships = function (input) {
-        return connector.runCall(this.name, 'getStarships', input);
+        return exports.connector.runCall(this.name, 'getStarships', input);
     };
     /**
 * SwapiApi['getVehicles']
@@ -73,7 +73,7 @@ var SwapiApiBaseConnection = (function () {
 * @return Promise getVehicles_output
 */
     SwapiApiBaseConnection.prototype.getVehicles = function (input) {
-        return connector.runCall(this.name, 'getVehicles', input);
+        return exports.connector.runCall(this.name, 'getVehicles', input);
     };
     return SwapiApiBaseConnection;
 }());

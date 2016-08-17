@@ -9,7 +9,7 @@
         "pretty": true,
         "stripInternal": true,
         "noEmitOnError": true,
-        "noImplicitAny": false,
+        "noImplicitAny": true,
         "suppressImplicitAnyIndexErrors": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": false,
@@ -19,6 +19,10 @@
         "**/!(*.d).ts",
         "!node_modules/**/*.d.ts",
         "!node_modules/**/*.ts",
+        "!client/node_modules/**/*.d.ts",
+        "!client/node_modules/**/*.ts",
+        "!client/**/*.d.ts",
+        "!client/**/*.ts",
         "typings/index.d.ts"
     ],
     "files": [

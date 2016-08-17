@@ -2,7 +2,7 @@
 var SwapiApi_1 = require('../connections/SwapiApi');
 function init(app) {
     var connection = new SwapiApi_1.SwapiApiConnection();
-    app.get('/api/v1/swapi/people/:id', 
+    app.get('/api/v1/swapi/people/:id?', 
     /**
     * register the device on the push Service
     *
@@ -11,9 +11,8 @@ function init(app) {
     * @param next function to invoke error handling.
     */
     function serviceCall(req, res, next) {
-        return connection.getPeople({
-            id: req.params.id
-        })
+        var _connection = req.params.id ? connection.getPeople({ id: req.params.id }) : connection.getPeoples();
+        return _connection
             .then(function (result) {
             return res.json(result);
         }, next).done();

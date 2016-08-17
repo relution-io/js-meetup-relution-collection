@@ -22,6 +22,16 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+       <xs:element name="peoples">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="count" type="xs:nonNegativeInteger"/>
+            <xs:element name="next" type="xs:string" />
+            <xs:element name="previous" type="xs:string" />
+            <xs:element name="results" ref="people" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="starships">
         <xs:complexType>
           <xs:sequence>
@@ -55,6 +65,14 @@
         <wadl:request />
         <wadl:response status="">
           <wadl:representation mediaType="application/json" element="people" />
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="people">
+      <wadl:method name="GET">
+        <wadl:request />
+        <wadl:response status="">
+          <wadl:representation mediaType="application/json" element="peoples"/>
         </wadl:response>
       </wadl:method>
     </wadl:resource>

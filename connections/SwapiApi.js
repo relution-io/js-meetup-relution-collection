@@ -22,6 +22,18 @@ var SwapiApiConnection = (function (_super) {
     function SwapiApiConnection() {
         _super.apply(this, arguments);
     }
+    // user code goes here
+    /**
+    * SwapiApi['getPeople']
+    *
+    * /people/{id}#GET
+    *
+    * @params input 'Object' getPeople_input
+    * @return Promise getPeople_output
+    */
+    SwapiApiConnection.prototype.getPeoples = function () {
+        return SwapiApi_gen_1.connector.runCall(this.name, 'getPeoples', {});
+    };
     return SwapiApiConnection;
 }(SwapiApi_gen_1.SwapiApiBaseConnection));
 exports.SwapiApiConnection = SwapiApiConnection;

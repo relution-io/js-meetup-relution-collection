@@ -22,7 +22,7 @@ import * as Q from 'q';
 * @param app express.js application to hook into.
 */
 
-export function init(app) {
+export function init(app: any) {
   app.post('/api/v1/push/registration',
     /**
     * register the device on the push Service
@@ -31,7 +31,7 @@ export function init(app) {
     * @param res result of call is provided as JSON body data.
     * @param next function to invoke error handling.
     */
-    function serviceCall(req, res, next) {
+    function serviceCall(req: any, res: any, next: any) {
       Q(pushService.registerPushDevice(req.body)).then(res.json.bind(res), next).done();
     }
   );
@@ -44,7 +44,7 @@ export function init(app) {
     * @param res result of call is provided as JSON body data.
     * @param next function to invoke error handling.
     */
-    function serviceCall(req, res, next) {
+    function serviceCall(req: any, res: any, next: any) {
       Q(pushService.postPushNotification(req.body)).then(res.json.bind(res), next).done();
     }
   );
@@ -57,7 +57,7 @@ export function init(app) {
     * @param res result of call is provided as JSON body data.
     * @param next function to invoke error handling.
     */
-    function serviceCall(req, res, next) {
+    function serviceCall(req: any, res: any, next: any) {
       Q(pushService.fetchPushNotification(req.params.uuid)).then(res.json.bind(res), next).done();
     }
   );
