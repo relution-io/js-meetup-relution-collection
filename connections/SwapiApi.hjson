@@ -1,13 +1,13 @@
 name: SwapiApi
 connectorProvider: HTTP(S)
 description: ""
+metadata: "swapi.wadl"
 protocol: com.mwaysolutions.mcap.connector.http.RestConnectionConfig
-metadata: swapi.wadl
 calls:
 {// please add APIs in use by the backend here
-  getMovies: /films/{id}#GET
+  getFilms: /films/{id}#GET
   getPeople: /people/{id}#GET
-  getPeoples: /people#GET
+  getPeoples: /peoples/{page}#GET
   getPlanet: /planet/{id}#GET
   getSpecies: /species/{id}#GET
   getStarships: /starships/{id}#GET

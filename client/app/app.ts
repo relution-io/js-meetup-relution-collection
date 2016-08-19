@@ -3,7 +3,9 @@ import {Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {LoginPage} from './pages/login/login';
 import * as Relution from 'relution-sdk';
-
+const mway = 'https://mway.relution.io';
+const local = 'https://pbrewing.mwaysolutions.com';
+const home = 'http://192.168.99.100:8080';
 @Component({
   template: '<ion-nav [root]="rootPage" relutiongray></ion-nav>'
 })
@@ -16,7 +18,7 @@ export class MyApp {
 
     // initialized the Relution SDK
     Relution.init({
-      serverUrl: 'https://pbrewing.mwaysolutions.com',
+      serverUrl: home,
       application: 'jsMeetupRelution'
     })
     .then((info) => {

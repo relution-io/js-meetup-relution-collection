@@ -1,5 +1,5 @@
-'use strict';
-
+import {GetPeoplesOutput} from './SwapiApi.gen';
+import {GetPeoplesInput} from './SwapiApi.gen';
 /**
  * @file ./SwapiApi.gen.ts
  * Simple MADP Application
@@ -9,26 +9,25 @@
  * 2016
  * All rights reserved.
  */
-import {SwapiApiBaseConnection, getPeople_input, getPeople_output} from './SwapiApi.gen';
-const connector = require('relution/connector');
+import {SwapiApiBaseConnection} from './SwapiApi.gen';
+const connector = require('relution/connector.js');
 /**
  * SwapiApiConnection
  */
 export class SwapiApiConnection extends SwapiApiBaseConnection {
-  // user code goes here
-  /**
-  * SwapiApi['getPeople']
-  *
-  * /people/{id}#GET
-  *
-  * @params input 'Object' getPeople_input
-  * @return Promise getPeople_output
-  */
-  public getSpecies(input: any): Q.Promise<any> {
-      return connector.runCall(
+    /**
+* SwapiApi['getPeoples']
+*
+* /people#GET
+*
+* @params input 'Object' GetPeoplesInput
+* @return Promise GetPeoplesOutput
+*/
+  public getPeoples(input?: GetPeoplesInput) {
+    return connector.runCall(
       this.name,
-      'getSpecies',
-      input
+      'getPeoples',
+      {page: '1', rawBody: {}}
     );
   }
 }

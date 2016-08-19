@@ -1,5 +1,5 @@
-import {People} from '../../providers/people/people';
-import {people} from '../../../../connections/SwapiApi.gen';
+import {People as PeoplePrv} from '../../providers/people/people';
+import {People as iPeople} from '../../../../connections/SwapiApi.gen';
 import {Component} from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -11,17 +11,17 @@ import { NavController } from 'ionic-angular';
 */
 @Component({
   templateUrl: 'build/pages/people/people.html',
-  providers: [People]
+  providers: [PeoplePrv]
 })
 export class PeoplePage {
-  public model: people;
+  public model: iPeople;
 
-  constructor(private navCtrl: NavController, private peopleSrv: People) {
-    this.peopleSrv.fetch()
+  constructor(private navCtrl: NavController, private peopleSrv: PeoplePrv) {
+    this.peopleSrv.getPeople(1)
       .subscribe(
         (resp) => {
           console.log(resp);
-      }
+        }
     );
   }
 }

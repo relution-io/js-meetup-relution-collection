@@ -68,7 +68,8 @@
         </wadl:response>
       </wadl:method>
     </wadl:resource>
-    <wadl:resource path="people">
+    <wadl:resource path="peoples/{page}">
+    <wadl:param name="page" type="xs:number" required="true" style="template" />
       <wadl:method name="GET">
         <wadl:request />
         <wadl:response status="">

@@ -1,9 +1,10 @@
-import {people} from '../../../../connections/SwapiApi.gen';
+import {People as iPeople} from '../../../../connections/SwapiApi.gen';
 import {Injectable} from '@angular/core';
 import * as Relution from 'relution-sdk';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/fromPromise';
+import {NavController, LoadingController, AlertController} from 'ionic-angular';
 
 /*
   Generated class for the People provider.
@@ -13,17 +14,38 @@ import 'rxjs/add/observable/fromPromise';
 @Injectable()
 export class People {
 
-  constructor() {}
+  constructor(private alertCtrl: AlertController, private navCtrl: NavController) {}
   /**
    * return a people by id
    */
-  fetch(id?: number): Observable<Relution.web.HttpResponse> {
+  getPeople(id: number) {
     return Observable.fromPromise(
       Relution.web.ajax({
         method: 'GET',
-        url: `api/v1/swapi/people/${id ? id :''}`
+        url: `api/v1/swapi/people/${id}`
+      }).catch((e) => {
+        console.error(e);
       })
     );
   }
-}
 
+  getPeoples() {
+    return Observable.fromPromise(
+      Relution.web.ajax({
+        method: 'GET',
+        url: `api/v1/swapi/peoples`
+      }).catch((e) => {
+        console.error(e);
+      })
+    );
+  }
+
+  onError(e) {
+    const alert = this.alertCtrl.create({
+      title: `${e.name} ${e.statusCode}`,
+      subTitle: e.message,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+}

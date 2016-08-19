@@ -1,72 +1,64 @@
 /**
-* @file ./SwapiApi.gen.ts
-* Created by Relution CLI on 17.08.2016
-* Copyright (c)
-* 2016
-* All rights reserved.
-*/
+    * @file ./SwapiApi.gen.ts
+    * Created by Relution CLI on 19.08.2016
+    * Copyright (c)
+    * 2016
+    * All rights reserved.
+    */
 import * as Q from 'q';
 // Relution APIs
 const connector = require('relution/connector.js');
 /**
-* @interface peoples
+* @interface Peoples
 */
-export interface peoples {
-  count?: string;
+export interface Peoples {
+  count?: number;
   next?: string;
   previous?: string;
-  people?: people[];
+  people?: People[];
 }
 
 /**
-* @interface getSpecies_output
+* @interface GetSpeciesOutput
 */
-export interface getSpecies_output {
+export interface GetSpeciesOutput {
   jsonBody?: string;
 }
 
 /**
-* @interface getMovies_input
+* @interface GetStarshipsInput
 */
-export interface getMovies_input {
+export interface GetStarshipsInput {
   id: string;
   rawBody?: any;
 }
 
 /**
-* @interface getStarships_input
+* @interface GetFilmsOutput
 */
-export interface getStarships_input {
-  id: string;
-  rawBody?: any;
-}
-
-/**
-* @interface getMovies_output
-*/
-export interface getMovies_output {
+export interface GetFilmsOutput {
   jsonBody?: string;
 }
 
 /**
-* @interface getPeople_input
+* @interface GetPeopleInput
 */
-export interface getPeople_input {
+export interface GetPeopleInput {
   id: string;
   rawBody?: any;
 }
 
 /**
-* @interface getStarships_output
+* @interface GetStarshipsOutput
 */
-export interface getStarships_output {
-  starships?: starships;
+export interface GetStarshipsOutput {
+  starships?: Starships;
 }
 
 /**
-* @interface people
+* @interface People
 */
-export interface people {
+export interface People {
   starships?: string[];
   height?: string;
   hair_color?: string;
@@ -84,53 +76,54 @@ export interface people {
 }
 
 /**
-* @interface getSpecies_input
+* @interface GetSpeciesInput
 */
-export interface getSpecies_input {
+export interface GetSpeciesInput {
   id: string;
   rawBody?: any;
 }
 
 /**
-* @interface getPeople_output
+* @interface GetPeopleOutput
 */
-export interface getPeople_output {
-  people?: people;
+export interface GetPeopleOutput {
+  people?: People;
 }
 
 /**
-* @interface getPlanet_output
+* @interface GetPlanetOutput
 */
-export interface getPlanet_output {
+export interface GetPlanetOutput {
   jsonBody?: string;
 }
 
 /**
-* @interface getVehicles_output
+* @interface GetVehiclesOutput
 */
-export interface getVehicles_output {
+export interface GetVehiclesOutput {
   jsonBody?: string;
 }
 
 /**
-* @interface getPeoples_input
+* @interface GetPeoplesInput
 */
-export interface getPeoples_input {
+export interface GetPeoplesInput {
+  page: string;
   rawBody?: any;
 }
 
 /**
-* @interface getVehicles_input
+* @interface GetVehiclesInput
 */
-export interface getVehicles_input {
+export interface GetVehiclesInput {
   id: string;
   rawBody?: any;
 }
 
 /**
-* @interface starships
+* @interface Starships
 */
-export interface starships {
+export interface Starships {
   consumables?: string;
   model?: string;
   passengers?: string;
@@ -152,16 +145,24 @@ export interface starships {
 }
 
 /**
-* @interface getPeoples_output
+* @interface GetPeoplesOutput
 */
-export interface getPeoples_output {
-  peoples?: peoples;
+export interface GetPeoplesOutput {
+  peoples?: Peoples;
 }
 
 /**
-* @interface getPlanet_input
+* @interface GetPlanetInput
 */
-export interface getPlanet_input {
+export interface GetPlanetInput {
+  id: string;
+  rawBody?: any;
+}
+
+/**
+* @interface GetFilmsInput
+*/
+export interface GetFilmsInput {
   id: string;
   rawBody?: any;
 }
@@ -174,17 +175,17 @@ export class SwapiApiBaseConnection {
   }
 
   /**
-* SwapiApi['getMovies']
+* SwapiApi['getFilms']
 *
 * /films/{id}#GET
 *
-* @params input 'Object' getMovies_input
-* @return Promise getMovies_output
+* @params input 'Object' GetFilmsInput
+* @return Promise GetFilmsOutput
 */
-  public getMovies(input: getMovies_input): Q.Promise<getMovies_output> {
+  public getFilms(input: GetFilmsInput): Q.Promise<GetFilmsOutput> {
     return connector.runCall(
       this.name,
-      'getMovies',
+      'getFilms',
       input
     );
   }
@@ -194,10 +195,10 @@ export class SwapiApiBaseConnection {
 *
 * /people/{id}#GET
 *
-* @params input 'Object' getPeople_input
-* @return Promise getPeople_output
+* @params input 'Object' GetPeopleInput
+* @return Promise GetPeopleOutput
 */
-  public getPeople(input: getPeople_input): Q.Promise<getPeople_output> {
+  public getPeople(input: GetPeopleInput): Q.Promise<GetPeopleOutput> {
     return connector.runCall(
       this.name,
       'getPeople',
@@ -208,12 +209,12 @@ export class SwapiApiBaseConnection {
   /**
 * SwapiApi['getPeoples']
 *
-* /people#GET
+* /peoples/{page}#GET
 *
-* @params input 'Object' getPeoples_input
-* @return Promise getPeoples_output
+* @params input 'Object' GetPeoplesInput
+* @return Promise GetPeoplesOutput
 */
-  public getPeoples(input: getPeoples_input): Q.Promise<getPeoples_output> {
+  public getPeoples(input?: GetPeoplesInput): Q.Promise<GetPeoplesOutput> {
     return connector.runCall(
       this.name,
       'getPeoples',
@@ -226,10 +227,10 @@ export class SwapiApiBaseConnection {
 *
 * /planet/{id}#GET
 *
-* @params input 'Object' getPlanet_input
-* @return Promise getPlanet_output
+* @params input 'Object' GetPlanetInput
+* @return Promise GetPlanetOutput
 */
-  public getPlanet(input: getPlanet_input): Q.Promise<getPlanet_output> {
+  public getPlanet(input: GetPlanetInput): Q.Promise<GetPlanetOutput> {
     return connector.runCall(
       this.name,
       'getPlanet',
@@ -237,17 +238,31 @@ export class SwapiApiBaseConnection {
     );
   }
 
-
+  /**
+* SwapiApi['getSpecies']
+*
+* /species/{id}#GET
+*
+* @params input 'Object' GetSpeciesInput
+* @return Promise GetSpeciesOutput
+*/
+  public getSpecies(input: GetSpeciesInput): Q.Promise<GetSpeciesOutput> {
+    return connector.runCall(
+      this.name,
+      'getSpecies',
+      input
+    );
+  }
 
   /**
 * SwapiApi['getStarships']
 *
 * /starships/{id}#GET
 *
-* @params input 'Object' getStarships_input
-* @return Promise getStarships_output
+* @params input 'Object' GetStarshipsInput
+* @return Promise GetStarshipsOutput
 */
-  public getStarships(input: getStarships_input): Q.Promise<getStarships_output> {
+  public getStarships(input: GetStarshipsInput): Q.Promise<GetStarshipsOutput> {
     return connector.runCall(
       this.name,
       'getStarships',
@@ -260,10 +275,10 @@ export class SwapiApiBaseConnection {
 *
 * /vehicles/{id}#GET
 *
-* @params input 'Object' getVehicles_input
-* @return Promise getVehicles_output
+* @params input 'Object' GetVehiclesInput
+* @return Promise GetVehiclesOutput
 */
-  public getVehicles(input: getVehicles_input): Q.Promise<getVehicles_output> {
+  public getVehicles(input: GetVehiclesInput): Q.Promise<GetVehiclesOutput> {
     return connector.runCall(
       this.name,
       'getVehicles',

@@ -3,12 +3,12 @@ import {NavController, LoadingController, AlertController} from 'ionic-angular';
 import { NgForm } from '@angular/common';
 import {TabsPage} from './../tabs/tabs';
 import * as Relution from 'relution-sdk';
-
+const local = {userName: 'pascal', password: 'hallo1234'};
 @Component({
   templateUrl: 'build/pages/login/login.html'
 })
 export class LoginPage {
-  public credentials = {userName: 'pascal', password: 'hallo1234'};
+  public credentials = local;
   constructor(private nav: NavController, private loadingCtrl: LoadingController, private alertCtrl: AlertController) {}
 
   onSubmit() {
@@ -27,6 +27,8 @@ export class LoginPage {
       }
     )
     .then((resp) => {
+      // console.log(resp);
+      // debugger;
       // go to the tab page
       this.nav.setRoot(TabsPage)
       .then(() => {
