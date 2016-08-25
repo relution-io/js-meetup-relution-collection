@@ -3,6 +3,7 @@
     "target": "es5",
     "module": "commonjs",
     "emitDecoratorMetadata": true,
+    "sourceMap": true,
     "experimentalDecorators": true
   },
   "filesGlob": [

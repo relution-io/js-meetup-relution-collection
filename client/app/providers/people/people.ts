@@ -4,7 +4,7 @@ import * as Relution from 'relution-sdk';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/fromPromise';
-import {NavController, LoadingController, AlertController} from 'ionic-angular';
+import {NavController, AlertController} from 'ionic-angular';
 
 /*
   Generated class for the People provider.
@@ -16,9 +16,10 @@ export class People {
 
   constructor(private alertCtrl: AlertController, private navCtrl: NavController) {}
   /**
-   * return a people by id
+   * @description  return a people by id
+   * @return Observable<iPeople>
    */
-  getPeople(id: number) {
+  getPeople(id: number): Observable<iPeople> {
     return Observable.fromPromise(
       Relution.web.ajax({
         method: 'GET',
@@ -28,7 +29,10 @@ export class People {
       })
     );
   }
-
+  /**
+   * @description  return a people by id
+   * @return Observable<Array<iPeople>>
+   */
   getPeoples() {
     return Observable.fromPromise(
       Relution.web.ajax({
@@ -39,7 +43,6 @@ export class People {
       })
     );
   }
-
   onError(e) {
     const alert = this.alertCtrl.create({
       title: `${e.name} ${e.statusCode}`,

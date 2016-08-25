@@ -222,9 +222,9 @@ Ok Deploy again after then add metamodels again.
 Now check your `Swapi.gen.ts` again and you will see a new Interface
 ```javascript
 /**
-* @interface people
+* @interface People
 */
-export interface people {
+export interface People {
   starships?: string[];
   height?: string;
   hair_color?: string;
@@ -291,6 +291,7 @@ First we have to import the Relution package with one line of code:
 import * as Relution from 'relution-sdk';
 ```
 after then we have to 'init' the Relution-SDK so add following line of code in to your constructor from the 'MyApp' Component:
+[read more](https://relution-io.github.io/relution-sdk/modules/core.html#init)
 ```javascript
 Relution.init({
   serverUrl: '{{YOUR_SERVER_URL}}',
@@ -306,12 +307,6 @@ You have only to add the host from your Relution server on the server URL and th
 
 At the end, your 'app.ts' looks like this:
 ```javascript
-import {Component} from '@angular/core';
-import {Platform, ionicBootstrap} from 'ionic-angular';
-import {StatusBar} from 'ionic-native';
-import {LoginPage} from './pages/login/login';
-import * as Relution from 'relution-sdk';
-
 @Component({
   template: '<ion-nav [root]="rootPage" relutiongray></ion-nav>'
 })
@@ -324,8 +319,8 @@ export class MyApp {
 
     // initialized the Relution SDK
     Relution.init({
-      serverUrl: 'https://pbrewing.mwaysolutions.com',
-      application: 'sampleAuth'
+      serverUrl: home,
+      application: 'jsMeetupRelution'
     })
     .then((info) => {
       console.log('Relution is ready');
@@ -342,141 +337,74 @@ export class MyApp {
 ionicBootstrap(MyApp);
 
 ```
-and if the init is successfully the browser console print out 'Relution is ready'.
+and if the init is successfully the browser console print out 'Relution is ready'. 
+If you need a Login example please read [here](https://github.com/relution-io/relution-sdk-sample-auth) more about it.
 
-### Login
-We need an component for the login, we can generate it with the 'ionic-cli':
 
-```bash
-> relution-sample-auth/client:  ionic g page login
-√ Create app/pages/login/login.html
-√ Create app/pages/login/login.scss
-√ Create app/pages/login/login.ts
+4. Fetch Data from Server
 
-Don't forget to add an import for login.scss in app/themes/app.core.scss:
-
-  @import "../pages/login/login.scss";
+To fetch Data from the Relution Server you can use the [Relution.web.ajax](https://relution-io.github.io/relution-sdk/modules/web.html#ajax)
+usage: 
+```javascript
+Relution.web.ajax({
+  method: 'GET',
+  url: `api/v1/swapi/people/${id}`
+}).catch((e) => {
+  console.error(e);
+});
 ```
-Now we have to change the start entry point of our app in the 'client/app/app.ts', change the 'rootPage':
+
+Ok let us add an Provider into the Client:
 
 ```javascript
-import {LoginPage} from './pages/login/login';
-
-
-@Component({
-  template: '<ion-nav [root]="rootPage"></ion-nav>'
-})
-export class MyApp {
-
-  private rootPage: any;
-
-  constructor(private platform: Platform) {
-    this.rootPage = LoginPage;
-   ...
-
-ionicBootstrap(MyApp);
-```
-Next, let us check our LoginPage open 'app/pages/login/login.ts' in your IDE and add the credentials object:
-
-```javascript
+import {People as iPeople} from '../../../../connections/SwapiApi.gen';
+import {Injectable} from '@angular/core';
 import * as Relution from 'relution-sdk';
-export class LoginPage {
-	public credentials = {userName: '', password: ''}
-	constructor(private nav: NavController) {}
-    ...
-```
-and add the following html into ```'<ion-content>'``` on the file 'app/pages/login/login.html'
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/fromPromise';
+import {NavController, AlertController} from 'ionic-angular';
 
-```html
-<ion-list>
-    <form>
-      <ion-item>
-        <ion-label fixed>Username</ion-label>
-        <ion-input type="text" [(ngModel)]="credentials.userName" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label fixed>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="credentials.password" required></ion-input>
-      </ion-item>
-      <button type="submit" fab fab-right on-click="onSubmit()">
-        <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>
-      </button>
-    </form>
-</ion-list>
-```
+@Injectable()
+export class People {
 
-The result will show the LoginPage with the credentials form. Ok now we can login the user on the Relution server for this we will need a new method i called it 'onSubmit':
-
-```javascript
-onSubmit() {
-    console.log(this.credentials);
-    Relution.web.login(
-      {
-        userName: this.credentials.userName,
-        password: this.credentials.password
-      },
-      {
-        offlineCapable: true
-      }
-    )
-    .then((resp) => {
-      console.log(resp); //server Response
-    })
-    .catch((e) => {
-      console.error(e);
-    });
+  constructor(private alertCtrl: AlertController, private navCtrl: NavController) {}
+  /**
+   * @description  return a people by id
+   * @return Observable<iPeople>
+   */
+  getPeople(id: number): Observable<iPeople> {
+    return Observable.fromPromise(
+      Relution.web.ajax({
+        method: 'GET',
+        url: `api/v1/swapi/people/${id}`
+      }).catch((e) => {
+        console.error(e);
+      })
+    );
   }
-```
 
-Now when you clicked on the login button you are still logged in.
-Full code example from the LoginPage:
-
-```javascript
-import {Component, Input} from '@angular/core';
-import {NavController, Loading, Alert} from 'ionic-angular';
-import { NgForm }    from '@angular/common';
-import {TabsPage} from './../tabs/tabs';
-import * as Relution from 'relution-sdk';
-
-@Component({
-  templateUrl: 'build/pages/login/login.html'
-})
-export class LoginPage {
-  public credentials = {userName: '', password: ''};
-  constructor(private nav: NavController) {}
-
-  onSubmit() {
-    const loading = Loading.create({
-      content: 'Please wait ...'
+  onError(e) {
+    const alert = this.alertCtrl.create({
+      title: `${e.name} ${e.statusCode}`,
+      subTitle: e.message,
+      buttons: ['OK']
     });
-    this.nav.present(loading);
-    return Relution.web.login(
-      {
-        userName: this.credentials.userName,
-        password: this.credentials.password
-      },
-      {
-        offlineCapable: true
-      }
-    )
-    .then((resp) => {
-      this.nav.rootNav.setRoot(TabsPage).then(() => {
-        loading.dismiss();
-      });
-    })
-    .catch((e: Relution.web.HttpError) => {
-      loading.dismiss();
-      let alert = Alert.create({
-        title: `${e.name} ${e.statusCode}`,
-        subTitle: e.message,
-        buttons: ['OK']
-      });
-      this.nav.present(alert);
-    });
+    alert.present();
   }
 }
-
 ```
 
+to use the method a sample code: 
+```javascript
+import {People as PeoplePrv} from '../../providers/people/people';
 
+this.peopleSrv.getPeople(1)
+.subscribe(
+  (resp) => {
+    this.model = resp;
+    console.log(`Hey ${this.model.name}`);
+  }
+);
 
+```
