@@ -406,5 +406,4 @@ this.peopleSrv.getPeople(1)
     console.log(`Hey ${this.model.name}`);
   }
 );
-
 ```

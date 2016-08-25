@@ -5,14 +5,22 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>people</ion-title>
+    <ion-title relutiongreen>{{model?.name}}</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
-
+<ion-card>
+  <ion-card-header relutiongray>
+    {{model?.name}}
+  </ion-card-header>
+  <ion-list>
+    <ion-item>
+      Mass: {{model?.mass}}
+    </ion-item>
+    <ion-item>
+      Gender: {{model?.gender}}
+    </ion-item>
+  </ion-list>
+</ion-card>
 </ion-content>

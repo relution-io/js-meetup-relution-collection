@@ -19,7 +19,7 @@ export class People {
    * @description  return a people by id
    * @return Observable<iPeople>
    */
-  getPeople(id: number): Observable<iPeople> {
+  getPeople(id: number): Observable<{people: iPeople}> {
     return Observable.fromPromise(
       Relution.web.ajax({
         method: 'GET',
@@ -33,19 +33,20 @@ export class People {
    * @description  return a people by id
    * @return Observable<Array<iPeople>>
    */
-  getPeoples() {
+  getPeoples(): Observable<Array<iPeople>> {
     return Observable.fromPromise(
       Relution.web.ajax({
         method: 'GET',
         url: `api/v1/swapi/peoples`
       }).catch((e) => {
-        console.error(e);
+        this.onError(e);
       })
     );
   }
+
   onError(e) {
     const alert = this.alertCtrl.create({
-      title: `${e.name} ${e.statusCode}`,
+      title: `${e.name}`,
       subTitle: e.message,
       buttons: ['OK']
     });
