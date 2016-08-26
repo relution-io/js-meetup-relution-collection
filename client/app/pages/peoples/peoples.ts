@@ -4,6 +4,7 @@ import {PeoplePage} from '../people/people';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {People as PeoplePrv} from '../../providers/people/people';
+import * as Relution from 'relution-sdk';
 
 const _ = require('lodash');
 
@@ -17,10 +18,13 @@ export class PeoplesPage {
   public lettersIndex = [];
 
   constructor(private navCtrl: NavController, private peopleSrv: PeoplePrv) {
+    // const a = Relution;
+    // debugger;
     this.collection = [];
     this.peopleSrv.getPeoples()
       .subscribe(
         (resp: Array<iPeople>) => {
+
           this.collection = _.groupBy(_.orderBy(resp, ['name'], ['asc']), (people) => {
             return people.name[0].toUpperCase();
           });

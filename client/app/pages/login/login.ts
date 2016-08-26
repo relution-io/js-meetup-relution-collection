@@ -1,3 +1,4 @@
+import {Credentials} from 'relution-sdk/lib/security/auth';
 import {Component, Input} from '@angular/core';
 import {NavController, LoadingController, AlertController} from 'ionic-angular';
 import { NgForm } from '@angular/common';
@@ -17,6 +18,7 @@ export class LoginPage {
     });
     loading.present();
     // login on  the Relution server
+
     return Relution.web.login(
       {
         userName: this.credentials.userName,
